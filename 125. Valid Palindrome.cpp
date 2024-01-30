@@ -1,5 +1,5 @@
+//approach 1
 class Solution {
-
 private:
     bool valid(char ch){
         if((ch>='A' && ch<='Z') || (ch>='a' && ch<='z') || (ch>='0' && ch<='9')){
@@ -45,5 +45,38 @@ public:
             temp[i]=lower(temp[i]);
         }
         return check(temp);
+    }
+};
+
+
+//approach 2
+class Solution {
+public:
+    bool isPalindrome(string s) {
+        //change every character to lower
+        for(int x=0;x<s.size();x++) s[x]=tolower(s[x]);
+
+        int i=0;
+        int j=s.size()-1;
+        while(i<=j){
+            //check for alphanumeric
+            if(((s[i]>='a' && s[i]<='z') || (s[i]>='0' && s[i]<='9')) && ((s[j]>='a' && s[j]<='z') || (s[j]>='0' && s[j]<='9'))){
+                if(s[i]==s[j]){
+                    i++;
+                    j--;
+                }
+                else return false;
+            }
+            //iterate if not alphanumeric
+            else{
+                if((s[i]>='a' && s[i]<='z') || (s[i]>='0' && s[i]<='9')) j--;
+                else if((s[j]>='a' && s[j]<='z') || (s[j]>='0' && s[j]<='9')) i++;
+                else{
+                    i++;
+                    j--;
+                }
+            }
+        }
+        return true;
     }
 };
